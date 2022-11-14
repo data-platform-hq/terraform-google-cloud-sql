@@ -41,8 +41,6 @@ No modules.
 | <a name="input_user"></a> [user](#input\_user)                                            | The name of the SQL instance user                                              | `string`   | n/a                                                                                                                         |   yes    |
 | <a name="input_passwd"></a> [passwd](#input\_passwd)                                      | The password of the SQL instance user                                          | `string`   | n/a                                                                                                                         |   yes    |
 
-<pre>{<br> "user connections"      = "15"<br> "default trace enabled" = "on"<br> "remote access"         = "off"<br>}</pre>
-
 
 ## Outputs
 | Name                                                                                        | Description                                                    |
