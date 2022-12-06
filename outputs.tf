@@ -1,5 +1,5 @@
 output "sql_instance_ip" {
-  value       = google_sql_database_instance.sql_instance.private_ip_address # ip_address.0.ip_address
+  value       = google_sql_database_instance.sql_instance.private_ip_address
   description = "The first private IPv4 address assigned to sql instance."
 }
 
