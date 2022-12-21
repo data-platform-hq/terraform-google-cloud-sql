@@ -1,3 +1,17 @@
+## SQL Users credentials section
+resource "random_string" "sqluser_passwd" {
+  for_each = var.users
+  length   = 16
+}
+
+resource "google_sql_user" "users" {
+  for_each = { for k, v in var.users : k => v if v != "sqlserver" }
+  name     = each.value
+  instance = google_sql_database_instance.sql_instance.name
+  password = random_string.sqluser_passwd[each.key].result
+}
+
+##SQL network section
 resource "google_compute_global_address" "private_ip_address" {
   name          = "${var.env}-${var.product_base_name}-private-ip-address"
   purpose       = var.purpose
@@ -14,6 +28,7 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   depends_on = [google_compute_global_address.private_ip_address]
 }
 
+## SQL instance section
 resource "random_id" "db_name_suffix" {
   byte_length = 5
 }
@@ -22,7 +37,7 @@ resource "google_sql_database_instance" "sql_instance" {
   name             = "${var.env}-${var.product_base_name}-${random_id.db_name_suffix.hex}-sql"
   region           = var.region
   database_version = var.db_version
-  root_password    = var.root_passwd
+  root_password    = random_string.sqluser_passwd["rootuser_name"].result
 
   settings {
     tier = var.tier
@@ -48,10 +63,9 @@ resource "google_sql_database_instance" "sql_instance" {
   depends_on = [google_service_networking_connection.private_vpc_connection]
 }
 
-
-resource "google_sql_user" "user" {
-  count    = length(var.user) == 0 ? 0 : 1
-  name     = var.user
-  instance = google_sql_database_instance.sql_instance.name
-  password = var.passwd
+resource "google_project_iam_member" "sql" {
+  project  = var.project_id
+  for_each = var.sqlsa_roles
+  role     = each.key
+  member   = "serviceAccount:${google_sql_database_instance.sql_instance.service_account_email_address}"
 }

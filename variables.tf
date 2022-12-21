@@ -1,3 +1,8 @@
+variable "project_id" {
+  description = "The ID of the project in which the resource belongs."
+  type        = string
+}
+
 variable "region" {
   description = "The location or cloud resources region for the environment."
   type        = string
@@ -11,6 +16,12 @@ variable "product_base_name" {
 variable "env" {
   description = "Variable to mark the environment of the resource (used to create services)."
   type        = string
+}
+
+variable "users" {
+  description = "Names of SQL instance users."
+  type        = map(string)
+  default     = {}
 }
 
 variable "network" {
@@ -48,9 +59,16 @@ variable "db_version" {
   default     = "SQLSERVER_2019_EXPRESS"
 }
 
-variable "root_passwd" {
-  description = "Initial root password. Required for MS SQL Server."
+variable "db_backup_location" {
+  description = "The location of the database backup file."
   type        = string
+  default     = ""
+}
+
+variable "dbbackup_type" {
+  description = "The type of the database backup file."
+  type        = string
+  default     = ""
 }
 
 variable "tier" {
@@ -82,16 +100,10 @@ variable "deletion_protection" {
   default     = false
 }
 
-variable "user" {
-  description = "The name of the SQL instance user."
-  type        = string
-  default     = ""
-}
-
-variable "passwd" {
-  description = "The password of the SQL instance user."
-  type        = string
-  default     = ""
+variable "sqlsa_roles" {
+  description = "The role that should be applied for SQL service account."
+  type        = set(string)
+  default     = []
 }
 
 variable "labels" {

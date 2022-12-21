@@ -12,3 +12,8 @@ output "sql_service_acc" {
   value       = google_sql_database_instance.sql_instance.service_account_email_address
   description = "The service account email address assigned to the sql instance."
 }
+
+output "users_creds" {
+  value       = { for k, v in var.users : replace(k, "user_name", "user_pass") => random_string.sqluser_passwd[k].result }
+  description = "Passwords for provided users."
+}
