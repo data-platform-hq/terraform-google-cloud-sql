@@ -59,18 +59,6 @@ variable "db_version" {
   default     = "SQLSERVER_2019_EXPRESS"
 }
 
-variable "db_backup_location" {
-  description = "The location of the database backup file."
-  type        = string
-  default     = ""
-}
-
-variable "dbbackup_type" {
-  description = "The type of the database backup file."
-  type        = string
-  default     = ""
-}
-
 variable "tier" {
   description = "The machine type to use."
   type        = string
