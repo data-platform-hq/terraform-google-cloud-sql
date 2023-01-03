@@ -11,7 +11,7 @@ resource "google_sql_user" "users" {
   password = random_string.sqluser_passwd[each.key].result
 }
 
-##SQL network section
+##SQL networking section
 resource "google_compute_global_address" "private_ip_address" {
   name          = "${var.env}-${var.product_base_name}-private-ip-address"
   purpose       = var.purpose
@@ -37,7 +37,7 @@ resource "google_sql_database_instance" "sql_instance" {
   name             = "${var.env}-${var.product_base_name}-${random_id.db_name_suffix.hex}-sql"
   region           = var.region
   database_version = var.db_version
-  root_password    = random_string.sqluser_passwd["rootuser_name"].result
+  root_password    = random_string.sqluser_passwd["rootuser"].result
 
   settings {
     tier = var.tier
@@ -56,7 +56,6 @@ resource "google_sql_database_instance" "sql_instance" {
       }
     }
     user_labels = var.labels
-
   }
   deletion_protection = var.deletion_protection
 
