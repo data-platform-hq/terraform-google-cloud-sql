@@ -1,5 +1,5 @@
 variable "project_id" {
-  description = "The ID of the project in which the resource belongs."
+  description = "ID of the project in which the resources should be created."
   type        = string
 }
 
@@ -78,7 +78,7 @@ variable "require_ssl" {
 
 variable "database_flags" {
   description = "Cloud SQL settinngs flags."
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
