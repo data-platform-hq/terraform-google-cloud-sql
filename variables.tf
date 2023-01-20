@@ -77,7 +77,7 @@ variable "require_ssl" {
 }
 
 variable "database_flags" {
-  description = "Cloud SQL settinngs flags."
+  description = "Cloud SQL settings flags."
   type        = map(string)
   default     = {}
 }
