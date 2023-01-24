@@ -16,4 +16,5 @@ output "sql_service_acc" {
 output "users_creds" {
   value       = { for k, v in var.users : replace(k, k, "${k}_pass") => random_string.sqluser_passwd[k].result }
   description = "Passwords for provided users"
+  sensitive   = true
 }
