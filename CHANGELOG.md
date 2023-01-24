@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/data-platform-hq/terraform-google-cloud-sql/compare/v1.0.0...v1.0.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* added sensitive mark for users_creds in outputs ([93ac3b7](https://github.com/data-platform-hq/terraform-google-cloud-sql/commit/93ac3b7b41bdb63c47e8fcdd855844baf52d2bb6))
+
 # 1.0.0 (2023-01-23)
 
 
