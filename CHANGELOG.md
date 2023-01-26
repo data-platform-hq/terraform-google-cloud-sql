@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/data-platform-hq/terraform-google-cloud-sql/compare/v1.0.1...v1.0.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* random_string replaced with a random_password ([feadf53](https://github.com/data-platform-hq/terraform-google-cloud-sql/commit/feadf53eec099528965d82f7ade040b2da57e78e))
+
 ## [1.0.1](https://github.com/data-platform-hq/terraform-google-cloud-sql/compare/v1.0.0...v1.0.1) (2023-01-24)
 
 
