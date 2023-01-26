@@ -1,5 +1,5 @@
 ## SQL Users credentials section
-resource "random_string" "sqluser_passwd" {
+resource "random_password" "sqluser_passwd" {
   for_each = var.users
   length   = 16
 }
@@ -8,7 +8,7 @@ resource "google_sql_user" "users" {
   for_each = { for k, v in var.users : k => v if v != "sqlserver" }
   name     = each.value
   instance = google_sql_database_instance.sql_instance.name
-  password = random_string.sqluser_passwd[each.key].result
+  password = random_password.sqluser_passwd[each.key].result
 }
 
 ##SQL networking section
@@ -37,7 +37,7 @@ resource "google_sql_database_instance" "sql_instance" {
   name             = "${var.env}-${var.product_base_name}-${random_id.db_name_suffix.hex}-sql"
   region           = var.region
   database_version = var.db_version
-  root_password    = random_string.sqluser_passwd["rootuser"].result
+  root_password    = random_password.sqluser_passwd["rootuser"].result
 
   settings {
     tier = var.tier
